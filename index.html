@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Watch</title>
+  <style>/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  background-color: #0c0c0c; /* Dark background for OTT look */
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header Styling */
+header {
+  text-align: center;
+  padding: 30px 20px;
+  background-color: #141414; /* Darker background for header */
+  border-bottom: 1px solid #333;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #e50914; /* Red color for OTT theme */
+}
+
+header input[type="text"] {
+  width: 80%;
+  max-width: 500px;
+  padding: 15px;
+  font-size: 1rem;
+  border: 2px solid #e50914; /* Red border to match OTT theme */
+  border-radius: 30px;
+  background-color: #333;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+header input[type="text"]:focus {
+  border-color: #ff4d4d; /* Lighter red border on focus */
+  background-color: #444;
+}
+
+/* Premium Section */
+#premiumSection {
+  margin-top: 30px;
+}
+
+#premiumSection button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #e50914; /* Red for Premium actions */
+  border: 2px solid #ff4d4d;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#premiumSection button:hover {
+  background-color: #ff4d4d; /* Lighter red on hover */
+  transform: scale(1.05);
+}
+
+/* Premium Status */
+#premiumStatus {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #ff4d4d;
+}
+
+/* Movie List */
+#movieList {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.movie-card {
+  width: 300px;
+  margin-bottom: 20px;
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #333;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 420px; /* Adjust size for more prominent movie covers */
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.movie-card h3 {
+  font-size: 1.4rem;
+  margin: 15px 0;
+  color: #e50914; /* Red color for movie titles */
+}
+
+.movie-card p {
+  font-size: 1rem;
+  color: #bbb;
+  margin-bottom: 20px;
+}
+
+/* Advertisement Banner */
+#advertisementBanner {
+  margin: 20px auto;
+  text-align: center;
+}
+
+#advertisementBanner img {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+#advertisementBanner img:hover {
+  transform: scale(1.05);
+}
+
+#advertisementBanner a {
+  display: block;
+}
+
+#advertisementBanner a:focus {
+  outline: none;
+}
+
+/* Support Button */
+#supportButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 15px 25px;
+  font-size: 1.1rem;
+  background-color: #3a3a3a;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+#supportButton:hover {
+  background-color: #5a5a5a;
+}
+
+/* Redeem Premium Code Popup */
+#redeemPopup {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+#redeemPopup div {
+  background-color: #222;
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+#redeemPopup h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+#redeemPopup input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  border: 2px solid #444;
+  border-radius: 30px;
+  background-color: #333;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+#redeemPopup button {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: #e50914;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+#redeemPopup button:hover {
+  background-color: #ff4d4d;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  header input[type="text"] {
+    width: 95%;
+  }
+
+  .movie-card {
+    width: 90%;
+  }
+
+  #advertisementBanner img {
+    max-width: 100%;
+  }
+
+  #premiumSection {
+    flex-direction: column;
+  }
+
+  #premiumSection button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}</style>
+</head>
+<body>
+  <!-- Support Button -->
+  <a href="https://suport.com" id="supportButton" style="position: absolute; top: 10px; left: 10px; padding: 10px 15px; background-color: blue; color: white; border-radius: 5px; text-decoration: none;">Support</a>
+
+  <!-- Header -->
+  <header>
+    <h2>🎥 TRENDY MOVIES</h2>
+
+    <!-- Advertisement Banner -->
+    <div id="advertisementBanner" style="margin: 20px auto; text-align: center;">
+      <a href="https://youtube.com/@trendyjiteshff?si=MymZh_jDbyRHk4Oc" target="_blank">
+        <img src="https://i.postimg.cc/2yLFnq06/In-Shot-20241117-012713537.gif" alt="Advertisement" style="width: 100%; max-width: 600px; height: auto; border-radius: 10px;">
+      </a>
+    </div>
+
+    <input type="text" id="searchBar" placeholder="Search for a movie...">
+    <div id="premiumStatus" style="color: yellow; font-size: 1.2rem; padding: 10px;"></div>
+  </header>
+
+  <!-- Premium Section (Buttons Side by Side) -->
+  <div id="premiumSection" style="text-align: center; margin: 20px; display: flex; justify-content: center; gap: 20px;">
+    <button id="redeemPremiumBtn" style="padding: 10px 20px;">Redeem Premium Code</button>
+    <button id="buyPremiumBtn" style="padding: 10px 20px;">Buy Premium Code</button>
+  </div>
+
+  <!-- Movie List Section -->
+  <main id="movieList" style="display: flex; flex-direction: column; align-items: center;">
+    <!-- Movie Cards will be dynamically loaded here -->
+  </main>
+
+  <!-- Full-Screen Redeem Premium Code Popup -->
+  <div id="redeemPopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); color: white; justify-content: center; align-items: center; text-align: center;">
+    <div style="background: rgba(0, 0, 0, 0.8); padding: 40px; border-radius: 10px; width: 80%; max-width: 400px;">
+      <h2>Enter Your Premium Code</h2>
+      <input type="text" id="premiumCodeInput" placeholder="Enter code here" style="padding: 10px; margin-bottom: 20px; width: 100%; font-size: 16px;">
+      <div>
+        <button id="submitPremiumCode" style="padding: 10px 20px; margin-right: 10px;">Redeem</button>
+        <button id="closePopup" style="padding: 10px 20px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Default Premium Codes and their expiration days
+    const premiumCodes = [
+      { code: 'CITDIYDIG46FV', days: 14 },
+      { code: 'DHLXDGOC45HCC', days: 30 }, 
+      { code: 'SPECIAL', days: 1 }, 
+      { code: 'EXPIRE1', days: 0.0022 }
+    ];
+
+    // Check if the user has a saved premium status and expiration date in localStorage
+    const storedPremiumStatus = localStorage.getItem('isPremium');
+    const storedPremiumExpiry = localStorage.getItem('premiumExpiry');
+    const user = {
+      isPremium: storedPremiumStatus === 'true',
+      premiumExpiry: storedPremiumExpiry ? new Date(storedPremiumExpiry) : null
+    };
+
+    const movieList = document.getElementById("movieList");
+    const searchBar = document.getElementById("searchBar");
+    const premiumStatusElement = document.getElementById("premiumStatus");
+
+    // Movie Data
+    const movies = [
+      {
+        id: 1,
+        name: "SQUID GAME S2",
+        description: "COMING SOON... 26/12/2024",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMyLQzwGKxbOw4lZ_cL8EbGMBzFue0RzS3pwgnvgS5_g&s",
+        url: "https://youtu.be/lQBmZBJCYcY?si=NeQNroRYrh_eyMsL",
+        premium: false,
+      },
+      {
+        id: 2,
+        name: "👑  AMARAN",
+        description: "ADIO-HINDI. QUALITY-1080p",
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjp50aRf_yNEGEFf6Ebo4tqojEec69H4MoZiYASjU56FSCVVSNFqnojwWumH2G-oAcKtuUBO9xgNZXt2yjgl8rkSqSZxif1Nbm00SsHCpjMONQKUo9cCK0E3Ip8c-GTujWTPi-1InR1p4YSe96tNWpiBgHnM94h55MPV3hJAgY0TioNVJEelFJBp0wpafuI/s1600/Amaran%202024.jpg",
+        url: "https://indi-files-drive.com/download/FGg_Os4B49C",
+        premium: true,
+      },
+     {
+        id: 3,
+        name: "EXHUMA",
+        description: "ADIO-HINDI. QUALITY-720P. COUNTRY-SOUTH KOREA",
+        cover: "https://imgshare.info/images/2024/08/14/568f933f1d6edc5556852685406bddbe.jpg",
+        url: "https://indi-files-drive.com/download/m3-83Pfay-8",
+        premium: false,
+      },
+      {
+        id: 4,
+        name: "👑 KANGUVA",
+        description: "ADIO-HINDI. QUALITY-1080P",
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLgFnyi21-O8nci_odAWNRF7KKz99Qz5YYebmQHaTVT3ynnvNLZ37papPWw1lQ2Z_YE05Mi3okvkeZT4AbExMcyvtkUrbN4Z_OMoKTucZR6zj-obO2gJ7j4BIMLlAWS9IX6w-Kb_RNdClVnDV7_o2v-VCF38zg2RIgQO4DkWxomq5M-7LHx0ms0I1EBrLf/s1600/Kanguva%202024.jpg",
+        url: "https://hubcloud.club/drive/bcvs1zm11bucoib",
+        premium: true,
+      },
+      ];
+
+    const redeemPopup = document.getElementById("redeemPopup");
+    const premiumCodeInput = document.getElementById("premiumCodeInput");
+    const submitPremiumCode = document.getElementById("submitPremiumCode");
+    const closePopup = document.getElementById("closePopup");
+
+    // Movie Loading Function
+    function loadMovies(moviesToLoad) {
+      movieList.innerHTML = moviesToLoad
+        .map(
+          (movie) => `
+        <div class="movie-card" data-id="${movie.id}" style="margin-bottom: 20px; text-align: center; width: 300px;">
+          <img src="${movie.cover}" alt="${movie.name}" style="width: 100%; height: auto; border-radius: 10px;">
+          <h3>${movie.name}</h3>
+          <p>${movie.description}</p>
+        </div>
+      `
+        )
+        .join("");
+    }
+
+    // Handle Movie Click
+    movieList.addEventListener("click", (e) => {
+      const card = e.target.closest(".movie-card");
+      if (card) {
+        const movieId = parseInt(card.dataset.id, 10);
+        const movie = movies.find((m) => m.id === movieId);
+
+        if (movie.premium && !user.isPremium) {
+          alert("This movie is for premium users only. Please upgrade to access it.");
+        } else {
+          window.location.href = movie.url;
+        }
+      }
+    });
+
+    // Search Functionality
+    searchBar.addEventListener("input", (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const filteredMovies = movies.filter((movie) =>
+        movie.name.toLowerCase().includes(searchTerm)
+      );
+      loadMovies(filteredMovies);
+    });
+
+    // Show Full-Screen Popup
+    document.getElementById("redeemPremiumBtn").addEventListener("click", () => {
+      redeemPopup.style.display = "flex";  // Show the popup
+    });
+
+    // Close Popup
+    closePopup.addEventListener("click", () => {
+      redeemPopup.style.display = "none";  // Close the popup
+    });
+
+    // Submit Premium Code Handler
+    submitPremiumCode.addEventListener("click", () => {
+      const enteredCode = premiumCodeInput.value.trim();
+
+      const premiumCode = premiumCodes.find(code => code.code === enteredCode);
+
+      if (premiumCode) {
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + premiumCode.days);
+
+        user.isPremium = true;
+        user.premiumExpiry = expiryDate;
+
+        localStorage.setItem('isPremium', 'true');
+        localStorage.setItem('premiumExpiry', expiryDate.toISOString());
+
+        alert(`Premium activated for ${premiumCode.days} days!`);
+        loadMovies(movies); // Reload movies to show premium content
+        updatePremiumStatus();
+        redeemPopup.style.display = "none";  // Close the popup after redemption
+      } else {
+        alert("Invalid code. Please try again.");
+      }
+    });
+
+    // Buy Premium Code Button Click Handler (Redirect to BuyPremium.com)
+    document.getElementById("buyPremiumBtn").addEventListener("click", () => {
+      window.location.href = "https://buypremium.com"; // Redirect to BuyPremium.com
+    });
+
+    // Update Premium Status and Expiry
+    function updatePremiumStatus() {
+      if (user.isPremium) {
+        const currentDate = new Date();
+        if (user.premiumExpiry && user.premiumExpiry > currentDate) {
+          const remainingDays = Math.ceil((user.premiumExpiry - currentDate) / (1000 * 60 * 60 * 24));
+          premiumStatusElement.textContent = `Premium expires in ${remainingDays} days.`;
+        } else {
+          user.isPremium = false;
+          localStorage.removeItem('isPremium');
+          localStorage.removeItem('premiumExpiry');
+          premiumStatusElement.textContent = "Premium expired.";
+          loadMovies(movies); // Reload movies to show only free content
+        }
+      } else {
+        premiumStatusElement.textContent = "You don't have Premium access.";
+      }
+    }
+
+    // Initial Setup
+    updatePremiumStatus();
+    loadMovies(movies);
+    
+  </script>
+</body>
+</html>
