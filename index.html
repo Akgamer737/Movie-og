@@ -34,6 +34,7 @@ header h1 {
   color: #e50914; /* Red color for OTT theme */
 }
 
+/* Highlighted Search Bar */
 header input[type="text"] {
   width: 80%;
   max-width: 500px;
@@ -45,32 +46,37 @@ header input[type="text"] {
   color: #ffffff;
   text-align: center;
   transition: all 0.3s ease;
+  box-shadow: 0 0 10px #e50914, 0 0 20px #ff4d4d; /* Glowing effect */
 }
 
 header input[type="text"]:focus {
   border-color: #ff4d4d; /* Lighter red border on focus */
   background-color: #444;
+  box-shadow: 0 0 15px #ff4d4d, 0 0 30px #ff4d4d; /* Stronger glow on focus */
 }
 
 /* Premium Section */
 #premiumSection {
   margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 #premiumSection button {
-  padding: 15px 30px;
-  font-size: 1.2rem;
+  padding: 10px 20px; /* Smaller size */
+  font-size: 1rem;
   color: #fff;
   background-color: #e50914; /* Red for Premium actions */
   border: 2px solid #ff4d4d;
-  border-radius: 30px;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 #premiumSection button:hover {
   background-color: #ff4d4d; /* Lighter red on hover */
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 /* Premium Status */
@@ -211,11 +217,11 @@ header input[type="text"]:focus {
 }
 
 #redeemPopup button {
-  padding: 15px 30px;
-  font-size: 1.1rem;
+  padding: 10px 20px; /* Smaller button */
+  font-size: 1rem; /* Adjusted font size */
   margin: 10px 5px;
   border: none;
-  border-radius: 30px;
+  border-radius: 20px;
   cursor: pointer;
   background-color: #e50914;
   color: #fff;
@@ -256,6 +262,8 @@ header input[type="text"]:focus {
 
   <!-- Header -->
   <header>
+  <!-- Small Logo -->
+  <img src="https://ideogram.ai/assets/image/lossless/response/qJxqeO-USACAoZE7PWFcRQ" alt="Logo" style="width: 50px; height: auto; margin-bottom: 10px;">
     <h2>🎥 TRENDY MOVIES</h2>
 
     <!-- Advertisement Banner -->
@@ -264,33 +272,33 @@ header input[type="text"]:focus {
         <img src="https://i.postimg.cc/2yLFnq06/In-Shot-20241117-012713537.gif" alt="Advertisement" style="width: 100%; max-width: 600px; height: auto; border-radius: 10px;">
       </a>
     </div>
-
+<!-- Premium Section (Buttons Side by Side) -->
+<div id="premiumSection" style="text-align: center; margin: 20px; display: flex; justify-content: center; gap: 20px;">
+  <button id="redeemPremiumBtn" style="padding: 10px 20px; flex: 1;">Redeem Premium Code</button>
+  <button id="buyPremiumBtn" style="padding: 10px 20px; flex: 1;">Buy Premium Code</button>
+</div>
     <input type="text" id="searchBar" placeholder="Search for a movie...">
     <div id="premiumStatus" style="color: yellow; font-size: 1.2rem; padding: 10px;"></div>
   </header>
 
-  <!-- Premium Section (Buttons Side by Side) -->
-  <div id="premiumSection" style="text-align: center; margin: 20px; display: flex; justify-content: center; gap: 20px;">
-    <button id="redeemPremiumBtn" style="padding: 10px 20px;">Redeem Premium Code</button>
-    <button id="buyPremiumBtn" style="padding: 10px 20px;">Buy Premium Code</button>
-  </div>
+
 
   <!-- Movie List Section -->
   <main id="movieList" style="display: flex; flex-direction: column; align-items: center;">
     <!-- Movie Cards will be dynamically loaded here -->
   </main>
 
-  <!-- Full-Screen Redeem Premium Code Popup -->
-  <div id="redeemPopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); color: white; justify-content: center; align-items: center; text-align: center;">
-    <div style="background: rgba(0, 0, 0, 0.8); padding: 40px; border-radius: 10px; width: 80%; max-width: 400px;">
-      <h2>Enter Your Premium Code</h2>
-      <input type="text" id="premiumCodeInput" placeholder="Enter code here" style="padding: 10px; margin-bottom: 20px; width: 100%; font-size: 16px;">
-      <div>
-        <button id="submitPremiumCode" style="padding: 10px 20px; margin-right: 10px;">Redeem</button>
-        <button id="closePopup" style="padding: 10px 20px;">Close</button>
-      </div>
+<!-- Full-Screen Redeem Premium Code Popup -->
+<div id="redeemPopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); color: white; justify-content: center; align-items: center; text-align: center;">
+  <div style="background: rgba(0, 0, 0, 0.8); padding: 40px; border-radius: 10px; width: 80%; max-width: 400px;">
+    <h2>Enter Your Premium Code</h2>
+    <input type="text" id="premiumCodeInput" placeholder="Enter code here" style="padding: 10px; margin-bottom: 20px; width: 100%; font-size: 16px;">
+    <div style="display: flex; justify-content: center; gap: 10px;">
+      <button id="submitPremiumCode" style="padding: 10px 20px; margin-right: 10px;">Redeem</button>
+      <button id="closePopup" style="padding: 10px 20px;">Close</button>
     </div>
   </div>
+</div>
 
   <script>
     // Default Premium Codes and their expiration days
@@ -320,7 +328,7 @@ header input[type="text"]:focus {
         name: "SQUID GAME S2",
         description: "COMING SOON... 26/12/2024",
         cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMyLQzwGKxbOw4lZ_cL8EbGMBzFue0RzS3pwgnvgS5_g&s",
-        url: "https://drive.google.com/file/d/1ECayk_-YDAJoqzt7DEAJOCf1d9968AuV/view?usp=drivesdk",
+        url: "https://me-qr.com/OJkik0nG",
         premium: false,
       },
       {
